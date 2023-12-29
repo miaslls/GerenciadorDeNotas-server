@@ -1,0 +1,15 @@
+# Compiled JavaScript files
+dist
+build
+
+# TypeScript source maps
+*.map
+
+# npm package manager lock file
+package-lock.json
+
+# Node.js module dependencies
+node_modules
+
+# TypeScript cache files
+*.tsbuildinfo
