@@ -1,8 +1,9 @@
 import express from 'express';
-import { getAll } from './resultado.controller';
+import { create, getAll } from './resultado.controller';
 
 const resultadoRouter = express.Router();
 
 resultadoRouter.get('/', getAll);
+resultadoRouter.post('/', create);
 
 export { resultadoRouter };
