@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { BimestreLabel, DisciplinaLabel } from '@prisma/client';
+import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 
 export function validateBody(req: Request, res: Response, next: NextFunction) {
   const body = req.body;
@@ -34,6 +35,19 @@ export function validateBody(req: Request, res: Response, next: NextFunction) {
       'O Registro não foi criado: ' + errorMessages.join(' - ');
 
     return res.status(400).send({ Erro: errorMessage });
+  }
+
+  next();
+}
+
+export function validateId(req: Request, res: Response, next: NextFunction) {
+  const { id } = req.params;
+  const isValid = uuidValidate(id) && uuidVersion(id) === 4;
+
+  if (!isValid) {
+    return res
+      .status(400)
+      .send({ Erro: "⚠️ O campo 'id' deve ser um UUID (v4) válido" });
   }
 
   next();
