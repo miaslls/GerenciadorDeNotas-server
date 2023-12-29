@@ -10,3 +10,11 @@ export async function createResultado(
 export async function getResultados(): Promise<Resultado[]> {
   return await prisma.resultado.findMany();
 }
+
+export async function getResultadoById(id: string): Promise<Resultado | null> {
+  return await prisma.resultado.findFirst({ where: { id } });
+}
+
+export async function removeResultado(id: string): Promise<Resultado> {
+  return await prisma.resultado.delete({ where: { id } });
+}
