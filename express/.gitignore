@@ -13,3 +13,16 @@ node_modules
 
 # TypeScript cache files
 *.tsbuildinfo
+
+# Local development database file
+dev.db
+
+# Environment variables
+.env
+
+# Log files (if any)
+logs/*
+
+# Private text/markdown files
+_*.txt
+_*.md
