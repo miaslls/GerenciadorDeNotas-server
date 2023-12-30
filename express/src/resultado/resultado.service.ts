@@ -1,5 +1,5 @@
 import prisma from '../../prisma/client';
-import { Prisma, Resultado } from '@prisma/client';
+import { Prisma, Resultado, BimestreLabel } from '@prisma/client';
 
 export async function createResultado(
   data: Prisma.ResultadoCreateInput
@@ -9,6 +9,12 @@ export async function createResultado(
 
 export async function getResultados(): Promise<Resultado[]> {
   return await prisma.resultado.findMany();
+}
+
+export async function getResultadosByBimestre(
+  bimestre: BimestreLabel
+): Promise<Resultado[]> {
+  return await prisma.resultado.findMany({ where: { bimestre } });
 }
 
 export async function getResultadoById(id: string): Promise<Resultado | null> {

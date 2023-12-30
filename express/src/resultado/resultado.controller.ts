@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import {
   createResultado,
   getResultados,
+  getResultadosByBimestre,
   getResultadoById,
   removeResultado,
 } from './resultado.service';
@@ -10,6 +11,20 @@ import {
 export async function create(req: Request, res: Response) {
   try {
     const body: Prisma.ResultadoCreateInput = req.body;
+    const resultadosByBimestre = await getResultadosByBimestre(body.bimestre);
+
+    if (resultadosByBimestre.length > 0) {
+      for (let resultado of resultadosByBimestre) {
+        if (resultado.disciplina === body.disciplina) {
+          return res.status(400).send({
+            Erro: `⚠️ Já existe um registro com a disciplina '${
+              body.disciplina
+            }' referente ao ${body.bimestre.toLowerCase()} bimestre`,
+          });
+        }
+      }
+    }
+
     const resultado = await createResultado(body);
 
     return res.status(201).send({ resultado });
