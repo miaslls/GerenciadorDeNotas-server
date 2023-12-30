@@ -11,11 +11,14 @@ import {
 export async function create(req: Request, res: Response) {
   try {
     const body: Prisma.ResultadoCreateInput = req.body;
-    const duplicateExists = await checkDuplicateResultado(body);
+    const duplicateExists = await checkDuplicateResultado(
+      body.bimestre,
+      body.disciplina
+    );
 
     if (duplicateExists) {
       return res.status(409).send({
-        Erro: `Conflito. ⚠️ Já existe um registro com a disciplina '${
+        Erro: `Conflito. Já existe um registro com a disciplina '${
           body.disciplina
         }' referente ao ${body.bimestre.toLowerCase()} bimestre`,
       });
@@ -27,7 +30,7 @@ export async function create(req: Request, res: Response) {
   } catch (error) {
     console.error({ error });
 
-    return res.status(500).send({ Erro: '⚠️ Erro Interno do Servidor' });
+    return res.status(500).send({ Erro: 'Erro Interno do Servidor' });
   }
 }
 
@@ -39,7 +42,7 @@ export async function getAll(req: Request, res: Response) {
   } catch (error) {
     console.error({ error });
 
-    return res.status(500).send({ Erro: '⚠️ Erro Interno do Servidor' });
+    return res.status(500).send({ Erro: 'Erro Interno do Servidor' });
   }
 }
 
@@ -49,17 +52,17 @@ export async function remove(req: Request, res: Response) {
     const resultado = await getResultadoById(id);
 
     if (!resultado) {
-      return res.status(404).send({ Erro: '⚠️ Resultado  não encontrado' });
+      return res.status(404).send({ Erro: 'Resultado não encontrado' });
     }
 
     await removeResultado(id);
 
     return res.status(200).send({
-      Mensagem: '✅ Resultado removido com sucesso',
+      Mensagem: 'Resultado removido com sucesso',
     });
   } catch (error) {
     console.error({ error });
 
-    return res.status(500).send({ Erro: '⚠️ Erro Interno do Servidor' });
+    return res.status(500).send({ Erro: 'Erro Interno do Servidor' });
   }
 }

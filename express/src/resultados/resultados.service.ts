@@ -1,5 +1,5 @@
 import prisma from '../../prisma/client';
-import { Prisma, Resultado } from '@prisma/client';
+import { Prisma, Resultado, Bimestre, Disciplina } from '@prisma/client';
 
 export async function createResultado(
   data: Prisma.ResultadoCreateInput
@@ -19,10 +19,10 @@ export async function removeResultado(id: string): Promise<Resultado> {
   return await prisma.resultado.delete({ where: { id } });
 }
 
-export async function checkDuplicateResultado({
-  bimestre,
-  disciplina,
-}: Prisma.ResultadoCreateInput): Promise<boolean> {
+export async function checkDuplicateResultado(
+  bimestre: Bimestre,
+  disciplina: Disciplina
+): Promise<boolean> {
   const existingResultado = await prisma.resultado.findFirst({
     where: { bimestre, disciplina },
   });
