@@ -7,32 +7,37 @@ export function validateBody(req: Request, res: Response, next: NextFunction) {
   const errorMessages = [];
 
   if (!body.hasOwnProperty('bimestre') || body.bimestre === '') {
-    errorMessages.push("⚠️ O campo 'bimestre' não foi preenchido");
+    errorMessages.push('⚠️ Bimestre não foi preenchido');
   } else if (!BimestreLabel.hasOwnProperty(body.bimestre)) {
     errorMessages.push(
-      "⚠️ O campo 'bimestre' deve ser: 'PRIMEIRO', 'SEGUNDO', 'TERCEIRO', ou 'QUARTO'"
+      `⚠️ Bimestre inválido. As opções válidas são ${Object.keys(
+        BimestreLabel
+      ).join(', ')}`
     );
   }
 
   if (!body.hasOwnProperty('disciplina') || body.disciplina === '') {
-    errorMessages.push("⚠️ O campo 'disciplina' não foi preenchido");
+    errorMessages.push('⚠️ Disciplina não foi preenchido');
   } else if (!DisciplinaLabel.hasOwnProperty(body.disciplina)) {
     errorMessages.push(
-      "⚠️ O campo 'disciplina' deve ser: 'Biologia', 'Artes', 'Geografia', ou 'Sociologia'"
+      `⚠️ Disciplina inválido. As opções válidas são ${Object.keys(
+        DisciplinaLabel
+      ).join(', ')}`
     );
   }
 
   if (!body.hasOwnProperty('nota') || body.nota === '') {
-    errorMessages.push("⚠️ O campo 'nota' não foi preenchido");
+    errorMessages.push('⚠️ Nota não foi preenchido');
   } else if (isNaN(body.nota) || body.nota < 0 || body.nota > 10) {
     errorMessages.push(
-      "⚠️ O campo 'nota' deve ser um número maior ou igual a 0, e menor ou igual a 10"
+      '⚠️ Nota inválido. Deve ser um número maior ou igual a 0, e menor ou igual a 10'
     );
   }
 
   if (errorMessages.length > 0) {
     const errorMessage =
-      'O Registro não foi criado: ' + errorMessages.join(' - ');
+      'Falha ao criar resultado. Verifique os dados e tente novamente: ' +
+      errorMessages.join(' - ');
 
     return res.status(400).send({ Erro: errorMessage });
   }
@@ -47,7 +52,7 @@ export function validateId(req: Request, res: Response, next: NextFunction) {
   if (!isValid) {
     return res
       .status(400)
-      .send({ Erro: "⚠️ O campo 'id' deve ser um UUID (v4) válido" });
+      .send({ Erro: '⚠️ ID inválido. Utilize um UUID (v4) válido' });
   }
 
   next();
