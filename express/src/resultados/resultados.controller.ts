@@ -6,7 +6,7 @@ import {
   getResultadoById,
   removeResultado,
   checkDuplicateResultado,
-} from './resultado.service';
+} from './resultados.service';
 
 export async function create(req: Request, res: Response) {
   try {
