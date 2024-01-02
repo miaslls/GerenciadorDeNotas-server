@@ -10,6 +10,7 @@ async function main() {
       { bimestre: 'PRIMEIRO', disciplina: 'GEOGRAFIA', nota: 9.1 },
       { bimestre: 'PRIMEIRO', disciplina: 'SOCIOLOGIA', nota: 6.6 },
     ],
+    skipDuplicates: true,
   });
 
   console.info('✅ Database seeded successfully 🌱');
