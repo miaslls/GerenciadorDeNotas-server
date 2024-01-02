@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.resultado.createMany({
     data: [
-      { bimestre: 'PRIMEIRO', disciplina: 'Biologia', nota: 8.5 },
-      { bimestre: 'PRIMEIRO', disciplina: 'Artes', nota: 7.2 },
-      { bimestre: 'PRIMEIRO', disciplina: 'Geografia', nota: 9.1 },
-      { bimestre: 'PRIMEIRO', disciplina: 'Sociologia', nota: 6.6 },
+      { bimestre: 'PRIMEIRO', disciplina: 'BIOLOGIA', nota: 8.5 },
+      { bimestre: 'PRIMEIRO', disciplina: 'ARTES', nota: 7.2 },
+      { bimestre: 'PRIMEIRO', disciplina: 'GEOGRAFIA', nota: 9.1 },
+      { bimestre: 'PRIMEIRO', disciplina: 'SOCIOLOGIA', nota: 6.6 },
     ],
   });
 

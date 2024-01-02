@@ -15,10 +15,10 @@ enum Bimestre {
 }
 
 enum Disciplina {
-  Biologia
-  Artes
-  Geografia
-  Sociologia
+  BIOLOGIA
+  ARTES
+  GEOGRAFIA
+  SOCIOLOGIA
 }
 
 // atualizadoEm is unused - CRUD does not support update
