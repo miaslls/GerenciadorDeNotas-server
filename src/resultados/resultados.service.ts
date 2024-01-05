@@ -8,7 +8,9 @@ export async function createResultado(
 }
 
 export async function getResultados(): Promise<Resultado[]> {
-  return await prisma.resultado.findMany();
+  return await prisma.resultado.findMany({
+    orderBy: [{ bimestre: 'asc' }, { disciplina: 'asc' }],
+  });
 }
 
 export async function getResultadoById(id: string): Promise<Resultado | null> {
