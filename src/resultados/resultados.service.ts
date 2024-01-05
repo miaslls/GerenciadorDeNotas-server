@@ -11,15 +11,6 @@ export async function getResultados(): Promise<Resultado[]> {
   return await prisma.resultado.findMany();
 }
 
-export async function getResultadosByBimestre(
-  bimestre: Bimestre
-): Promise<Resultado[]> {
-  return await prisma.resultado.findMany({
-    where: { bimestre },
-    orderBy: { disciplina: 'asc' },
-  });
-}
-
 export async function getResultadoById(id: string): Promise<Resultado | null> {
   return await prisma.resultado.findFirst({ where: { id } });
 }
