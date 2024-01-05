@@ -1,8 +1,9 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, Bimestre } from '@prisma/client';
 import { Request, Response } from 'express';
 import {
   createResultado,
   getResultados,
+  getResultadosByBimestre,
   getResultadoById,
   removeResultado,
   checkDuplicateResultado,
@@ -36,6 +37,18 @@ export async function create(req: Request, res: Response) {
 
 export async function getAll(req: Request, res: Response) {
   try {
+    const groupbyParam = req.query.groupby;
+
+    if (groupbyParam === 'bimestre') {
+      const queries = Object.values(Bimestre).map((bimestre) =>
+        getResultadosByBimestre(bimestre)
+      );
+
+      const groupedResultados = await Promise.all(queries);
+
+      return res.status(200).send(groupedResultados);
+    }
+
     const resultados = await getResultados();
 
     return res.status(200).send({ resultados });
