@@ -29,7 +29,7 @@ Install dependencies
 Run the project
 
 ```bash
-> npm run start
+> npm run build
 ```
 
 Seed the database
