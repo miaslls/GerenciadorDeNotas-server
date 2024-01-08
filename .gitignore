@@ -13,3 +13,17 @@ node_modules
 
 # TypeScript cache files
 *.tsbuildinfo
+
+# Prisma-related files
+prisma/migrations
+prisma/client
+
+# Sensitive credentials
+.env
+
+# Log files (if any)
+logs/*
+
+# Private text/markdown files
+_*.txt
+_*.md

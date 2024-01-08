@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DEV_DATABASE_URL")
+}
+
+enum Bimestre {
+  PRIMEIRO
+  SEGUNDO
+  TERCEIRO
+  QUARTO
+}
+
+enum Disciplina {
+  BIOLOGIA
+  ARTES
+  GEOGRAFIA
+  SOCIOLOGIA
+}
+
+// atualizadoEm is unused - CRUD does not support update
+model Resultado {
+  bimestre     Bimestre
+  disciplina   Disciplina
+  nota         Float
+  criadoEm     DateTime   @default(now()) @map("criado_em")
+  atualizadoEm DateTime   @default(now()) @map("atualizado_em")
+  id           String     @id @default(uuid())
+
+  @@unique([bimestre, disciplina])
+}
