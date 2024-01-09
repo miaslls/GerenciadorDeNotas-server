@@ -11,13 +11,13 @@ Desafio MB Psicologia: **BACKEND**
 Clone the project
 
 ```bash
-> git clone https://github.com/miaslls/desafio_mb-psicologia__back.git
+> git clone https://github.com/miaslls/GerenciadorDeNotas-server.git
 ```
 
 Go to the project directory
 
 ```bash
-> cd desafio_mb-psicologia__back
+> cd GerenciadorDeNotas-server
 ```
 
 Install dependencies

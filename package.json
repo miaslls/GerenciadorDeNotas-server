@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miaslls/desafio_mb-psicologia__back.git"
+    "url": "git+https://github.com/miaslls/GerenciadorDeNotas-server.git"
   },
   "author": "miaslls",
   "license": "ISC",
-  "homepage": "https://github.com/miaslls/desafio_mb-psicologia__back#readme",
+  "homepage": "https://github.com/miaslls/GerenciadorDeNotas-server#readme",
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "cors": "^2.8.5",
