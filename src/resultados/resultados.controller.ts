@@ -18,8 +18,8 @@ export async function create(req: Request, res: Response) {
 
     if (duplicateExists) {
       return res.status(409).send({
-        Erro: `Conflito. Já existe um registro com a disciplina '${
-          body.disciplina
+        message: `Conflito: Já existe um registro com a disciplina '${
+          body.disciplina.charAt(0) + body.disciplina.toLowerCase().substring(1)
         }' referente ao ${body.bimestre.toLowerCase()} bimestre`,
       });
     }
@@ -28,9 +28,9 @@ export async function create(req: Request, res: Response) {
 
     return res.status(201).send(resultado);
   } catch (error) {
-    console.error({ error });
+    console.error(error);
 
-    return res.status(500).send({ Erro: 'Erro Interno do Servidor' });
+    return res.status(500).send({ message: 'Erro Interno do Servidor' });
   }
 }
 
@@ -40,9 +40,9 @@ export async function getAll(req: Request, res: Response) {
 
     return res.status(200).send(resultados);
   } catch (error) {
-    console.error({ error });
+    console.error(error);
 
-    return res.status(500).send({ Erro: 'Erro Interno do Servidor' });
+    return res.status(500).send({ message: 'Erro Interno do Servidor' });
   }
 }
 
@@ -52,17 +52,17 @@ export async function remove(req: Request, res: Response) {
     const resultado = await getResultadoById(id);
 
     if (!resultado) {
-      return res.status(404).send({ Erro: 'Resultado não encontrado' });
+      return res.status(404).send({ message: 'Resultado não encontrado' });
     }
 
     await removeResultado(id);
 
     return res.status(200).send({
-      Mensagem: 'Resultado removido com sucesso',
+      message: 'Resultado removido com sucesso',
     });
   } catch (error) {
-    console.error({ error });
+    console.error(error);
 
-    return res.status(500).send({ Erro: 'Erro Interno do Servidor' });
+    return res.status(500).send({ message: 'Erro Interno do Servidor' });
   }
 }

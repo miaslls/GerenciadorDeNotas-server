@@ -4,36 +4,37 @@ import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 
 export function validateBody(req: Request, res: Response, next: NextFunction) {
   const body = req.body;
-  const errorMessages: {
-    bimestre?: string;
-    disciplina?: string;
-    nota?: string;
-  } = {};
+
+  const errorMessages: string[] = [];
 
   if (!body.hasOwnProperty('bimestre')) {
-    errorMessages.bimestre = 'Bimestre não foi preenchido';
+    errorMessages.push('Bimestre não foi preenchido');
   } else if (!Bimestre.hasOwnProperty(body.bimestre)) {
-    errorMessages.bimestre = `Bimestre inválido; As opções válidas são ${Object.keys(
-      Bimestre
-    ).join(', ')}`;
+    const error =
+      'Bimestre inválido; As opções válidas são ' +
+      Object.keys(Bimestre).join(', ');
+
+    errorMessages.push(error);
   }
 
   if (!body.hasOwnProperty('disciplina')) {
-    errorMessages.disciplina = 'Disciplina não foi preenchido';
+    errorMessages.push('Disciplina não foi preenchido');
   } else if (!Disciplina.hasOwnProperty(body.disciplina)) {
-    errorMessages.disciplina = `Disciplina inválida; As opções válidas são ${Object.keys(
-      Disciplina
-    ).join(', ')}`;
+    const error =
+      'Disciplina inválida; As opções válidas são ' +
+      Object.keys(Disciplina).join(', ');
+
+    errorMessages.push(error);
   }
 
   if (!body.hasOwnProperty('nota')) {
-    errorMessages.nota = 'Nota não foi preenchido';
+    errorMessages.push('Nota não foi preenchido');
   } else if (typeof body.nota !== 'number' || body.nota < 0 || body.nota > 10) {
-    errorMessages.nota = 'Nota inválida; Deve ser um número entre 0 e 10';
+    errorMessages.push('Nota inválida; Deve ser um número entre 0 e 10');
   }
 
-  if (Object.keys(errorMessages).length > 0) {
-    return res.status(400).send({ Erro: errorMessages });
+  if (errorMessages.length > 0) {
+    return res.status(400).send({ message: errorMessages.join('; ') });
   }
 
   next();
@@ -46,7 +47,7 @@ export function validateId(req: Request, res: Response, next: NextFunction) {
   if (!isValid) {
     return res
       .status(400)
-      .send({ Erro: 'ID inválido; Utilize um UUID v4 válido' });
+      .send({ message: 'ID inválido; Utilize um UUID v4 válido' });
   }
 
   next();
