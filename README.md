@@ -4,8 +4,6 @@
 ![Static Badge: Express](https://img.shields.io/badge/Express-5a5a5a?logo=express)
 ![Static Badge: Prisma](https://img.shields.io/badge/Prisma-5a5a5a?logo=prisma)
 
-Desafio MB Psicologia: **BACKEND**
-
 ## ⚙️ Install & Setup
 
 Clone the project
